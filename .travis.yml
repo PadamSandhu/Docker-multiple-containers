@@ -1,23 +1,24 @@
 sudo: required
 services:
-  - docker
+  -docker
 
-before_install:
-  - docker build -t miloscpt/react-test -f ./client/Dockerfile.dev ./client
+  before_install:
+    - docker build -t sandhp7/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run miloscpt/react-test npm test -- --coverage
+  - docker run sandhp7/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t miloscpt/multi-client ./client
-  - docker build -t miloscpt/multi-nginx ./nginx
-  - docker build -t miloscpt/multi-server ./server
-  - docker build -t miloscpt/multi-worker ./worker
-# # login to docker hub
-# - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker build -t sandhp7/multi-client ./client
+  - docker build -t sandhp7/multi-nginx ./nginx
+  - docker build -t sandhp7/multi-server ./server
+  - docker build -t sandhp7/multi-worker ./worker
 
-# # take those images and push them to docker hub
-# - docker push miloscpt/multi-client
-# - docker push miloscpt/multi-nginx
-# - docker push miloscpt/multi-server
-# - docker push miloscpt/multi-worker
+# Log in to the docker CLI
+- echo docker -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
+
+# Take those images and push them on Dockerhub
+- docker push sandhp7/multi-client
+- docker push sandhp7/multi-nginx
+- docker push sandhp7/multi-server
+- docker push sandhp7/multi-worker
