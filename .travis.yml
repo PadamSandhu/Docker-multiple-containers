@@ -15,7 +15,7 @@ after_success:
   - docker build -t sandhp7/multi-worker ./worker
 
 # Log in to the docker CLI
-- echo docker -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
+- docker -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
 
 # Take those images and push them on Dockerhub
 - docker push sandhp7/multi-client
